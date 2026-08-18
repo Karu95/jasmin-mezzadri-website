@@ -1,0 +1,8 @@
+# robots.txt — https://[DOMAIN]/
+User-agent: *
+Allow: /
+
+# Hinweis: /impressum.html und /datenschutz.html tragen ein Meta-Robots-Tag
+# "noindex,follow" und dürfen daher gecrawlt, aber nicht indexiert werden.
+
+Sitemap: https://[DOMAIN]/sitemap.xml
