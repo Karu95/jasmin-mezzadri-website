@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="1000" viewBox="0 0 800 1000" role="img" aria-labelledby="phTitle">
+  <title id="phTitle">Platzhalter: Portraitfoto hier einsetzen</title>
+  <defs>
+    <style>
+      .f { font-family: ui-sans-serif, "Segoe UI", Inter, Roboto, "Helvetica Neue", Arial, sans-serif; }
+    </style>
+  </defs>
+
+  <rect width="800" height="1000" fill="#F5F0E8"/>
+  <rect x="16" y="16" width="768" height="968" fill="none" stroke="#E4DCD0" stroke-width="2" stroke-dasharray="10 10" rx="10"/>
+
+  <g stroke="#C2410C" stroke-width="7" fill="none" stroke-linecap="round" stroke-linejoin="round" opacity="0.55">
+    <circle cx="400" cy="432" r="92"/>
+    <path d="M262 618c22-62 76-98 138-98s116 36 138 98"/>
+  </g>
+
+  <text class="f" x="400" y="740" text-anchor="middle" font-size="30" font-weight="700" fill="#16130F" letter-spacing="-0.5">Portraitfoto hier einsetzen</text>
+  <text class="f" x="400" y="784" text-anchor="middle" font-size="20" fill="#5C544B">Seitenverhältnis 4:5 · empfohlen 800 × 1000 px</text>
+</svg>

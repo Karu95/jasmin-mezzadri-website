@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="ogTitle ogDesc">
+  <title id="ogTitle">Jasmin Mezzadri — POS Marketing &amp; Vertrieb</title>
+  <desc id="ogDesc">Probieren ist nicht das Ziel. Wiederkauf schon.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#C2410C"/>
+      <stop offset="100%" stop-color="#9A330A"/>
+    </linearGradient>
+    <style>
+      .f { font-family: ui-sans-serif, "Segoe UI", Inter, Roboto, "Helvetica Neue", Arial, sans-serif; }
+    </style>
+  </defs>
+
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <circle cx="1090" cy="70" r="340" fill="#FFFDF9" opacity="0.06"/>
+  <circle cx="60" cy="600" r="220" fill="#FFFDF9" opacity="0.05"/>
+
+  <g class="f" fill="#FFFDF9">
+    <text x="90" y="152" font-size="22" font-weight="700" letter-spacing="6" opacity="0.85">POS MARKETING · PRODUKT PROMOTION · VERTRIEB</text>
+    <text x="90" y="290" font-size="72" font-weight="700" letter-spacing="-1.5">Probieren ist nicht das Ziel.</text>
+    <text x="90" y="374" font-size="72" font-weight="700" letter-spacing="-1.5">Wiederkauf schon.</text>
+    <rect x="90" y="428" width="88" height="4" rx="2" fill="#FFFDF9" opacity="0.6"/>
+    <text x="90" y="504" font-size="34" font-weight="700" letter-spacing="-0.5">Jasmin Mezzadri</text>
+    <text x="90" y="546" font-size="22" font-weight="400" opacity="0.85">Aktivierung am Point of Sale für FMCG- und LEH-Marken — bundesweit.</text>
+  </g>
+</svg>
