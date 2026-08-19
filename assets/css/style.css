@@ -20,7 +20,12 @@
      #8E8071 = 3.77:1 auf --paper und 3.38:1 auf --paper-alt. */
   --line-strong: #8E8071;
 
-  /* Typografie */
+  /* Typografie
+     Zwei Familien nach Jongmans et al. (2022): eigenstaendige Display-Schrift fuer
+     Headlines + neutrale, gut lesbare Fliessschrift. Fraunces ist SIL-OFL-lizenziert
+     (Lizenz: assets/fonts/Fraunces-OFL.txt) und wird LOKAL ausgeliefert —
+     kein CDN, kein externer Request. */
+  --font-display: "Fraunces", Georgia, "Times New Roman", serif;
   --font-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Inter, Roboto,
                "Helvetica Neue", Arial, sans-serif;
   --lh-body: 1.65;
@@ -53,6 +58,20 @@
   --ease: cubic-bezier(0.22, 0.61, 0.36, 1);
 }
 
+/* --- 1b. Schrift (lokal, kein externer Request) -------------------------- */
+/* Fraunces — Variable Font, Achse wght 500–800. Subset auf Latin + deutsche
+   Sonderzeichen + Typografie-Glyphen, opsz/SOFT/WONK fest eingestellt.
+   Datei: 35 KB. Lizenz: SIL Open Font License 1.1 (assets/fonts/Fraunces-OFL.txt).
+   font-display: swap → Text ist sofort in der Fallback-Schrift lesbar. */
+@font-face {
+  font-family: "Fraunces";
+  src: url("../fonts/fraunces-var.woff2") format("woff2-variations"),
+       url("../fonts/fraunces-var.woff2") format("woff2");
+  font-weight: 500 800;
+  font-style: normal;
+  font-display: swap;
+}
+
 /* --- 2. Reset / Basis --------------------------------------------------- */
 *, *::before, *::after { box-sizing: border-box; }
 
@@ -79,17 +98,24 @@ img { height: auto; }
 
 h1, h2, h3, h4 {
   margin: 0 0 var(--sp-4);
-  font-weight: 700;
-  line-height: 1.15;
-  letter-spacing: -0.02em;
+  font-family: var(--font-display);
+  font-weight: 600;
+  line-height: 1.14;
+  letter-spacing: -0.015em;
   text-wrap: balance;
   overflow-wrap: break-word;
   hyphens: auto;
 }
 
-h1 { font-size: clamp(2.2rem, 5vw, 3.6rem); }
-h2 { font-size: clamp(1.6rem, 3.4vw, 2.4rem); }
-h3 { font-size: clamp(1.06rem, 1.6vw, 1.2rem); letter-spacing: -0.01em; }
+h1 { font-size: clamp(2.25rem, 5vw, 3.7rem); letter-spacing: -0.025em; }
+h2 { font-size: clamp(1.65rem, 3.4vw, 2.45rem); letter-spacing: -0.02em; }
+h3 {
+  font-family: var(--font-sans);
+  font-weight: 700;
+  font-size: clamp(1.06rem, 1.6vw, 1.2rem);
+  letter-spacing: -0.01em;
+}
+h4 { font-family: var(--font-sans); font-weight: 700; }
 
 p { margin: 0 0 var(--sp-4); }
 p:last-child { margin-bottom: 0; }
@@ -236,7 +262,15 @@ li { list-style: none; }
   color: var(--ink);
   line-height: 1.2;
 }
-.brand-name { font-weight: 700; font-size: 1.02rem; letter-spacing: -0.015em; }
+/* Wortmarke — traegt die Markenidentitaet, daher bewusst in der Display-Schrift
+   (Lindstroem 2016: bei einer typografischen Wortmarke IST die Schrift das
+   Identitaetsmerkmal). Fuer Print/Visitenkarte spaeter als SVG in Pfaden. */
+.brand-name {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.12rem;
+  letter-spacing: -0.02em;
+}
 .brand-tag {
   font-size: 0.68rem;
   letter-spacing: 0.13em;
@@ -447,9 +481,10 @@ body.nav-open { overflow: hidden; }
 .pullquote blockquote { margin: 0; }
 .pullquote p {
   margin: 0;
-  font-size: clamp(1.25rem, 2.8vw, 1.75rem);
-  font-weight: 600;
-  line-height: 1.35;
+  font-family: var(--font-display);
+  font-size: clamp(1.3rem, 2.8vw, 1.8rem);
+  font-weight: 500;
+  line-height: 1.32;
   letter-spacing: -0.015em;
   text-wrap: balance;
 }
@@ -645,6 +680,23 @@ body.nav-open { overflow: hidden; }
 
 .form-note { font-size: 0.82rem; color: var(--ink-soft); margin: var(--sp-4) 0; }
 
+/* Optionale Angaben: klar abgesetzt, damit die Pflichtfelder oben als
+   vollstaendige, absendbare Anfrage lesbar sind. */
+.field-group {
+  margin: var(--sp-5) 0 0;
+  padding: var(--sp-4) 0 0;
+  border: 0;
+  border-top: 1px solid var(--line);
+}
+.field-group-legend {
+  padding: 0;
+  margin-bottom: var(--sp-4);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--ink-soft);
+}
+
 .form-status { margin: var(--sp-4) 0 0; font-size: 0.92rem; }
 .form-status:empty { margin: 0; }
 .form-status.is-success {
@@ -671,6 +723,8 @@ body.nav-open { overflow: hidden; }
   text-align: left;
 }
 .calendly-note { font-size: 0.88rem; color: var(--ink-soft); margin-bottom: var(--sp-4); }
+.calendly-actions { display: flex; flex-wrap: wrap; gap: var(--sp-3); }
+.calendly-actions .btn { flex: 1 1 auto; justify-content: center; }
 .calendly-inline-widget { min-height: 680px; margin-top: var(--sp-2); }
 
 .contact-direct { margin-top: var(--sp-6); border-top: 1px solid var(--line); }
@@ -732,11 +786,15 @@ body.nav-open { overflow: hidden; }
   margin-bottom: var(--sp-4);
 }
 
-/* --- 17. Scroll-Reveal (nur mit JS aktiv) ------------------------------- */
+/* --- 17. Scroll-Reveal (nur mit JS aktiv) -------------------------------
+   Bewusst zurueckhaltend: Jongmans et al. (2022) zeigen, dass die Wirkung von
+   Design ueber Usability laeuft — Inhalte, die erst erscheinen muessen, halten
+   die Informationssuche auf. Daher nur noch ein leichtes Einblenden ohne
+   nennenswerten Versatz, und deutlich kuerzer als zuvor (0.6s -> 0.28s). */
 .js .reveal {
-  opacity: 0;
-  transform: translateY(14px);
-  transition: opacity 0.6s var(--ease), transform 0.6s var(--ease);
+  opacity: 0.001;
+  transform: translateY(5px);
+  transition: opacity 0.28s var(--ease), transform 0.28s var(--ease);
 }
 .js .reveal.is-visible { opacity: 1; transform: none; }
 
@@ -826,7 +884,12 @@ body.nav-open { overflow: hidden; }
 
 /* --- 18. Breakpoints ---------------------------------------------------- */
 @media (min-width: 640px) {
-  .card-grid { grid-template-columns: repeat(2, 1fr); gap: var(--sp-5); }
+  /* minmax(0, 1fr) statt 1fr: sonst waechst eine Spalte an der min-content-Breite
+     langer Komposita ueber ihren Anteil hinaus und die Seite scrollt horizontal. */
+  .card-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--sp-5); }
+  /* Symmetrie (Jongmans et al. 2022): keine angebrochene Schlusszeile.
+     Bei 5 Karten in 2 Spalten laeuft die letzte Karte ueber die volle Breite. */
+  .card-grid.grid-5 > :last-child { grid-column: 1 / -1; }
   .step { gap: var(--sp-5); }
   .footer-inner {
     grid-template-columns: 1fr auto;
@@ -857,7 +920,14 @@ body.nav-open { overflow: hidden; }
   .nav-list a:not(.btn).is-active { border-bottom-color: var(--accent); }
   .nav-cta { margin-top: 0; margin-left: var(--sp-2); }
 
-  .card-grid.cols-3 { grid-template-columns: repeat(3, 1fr); }
+  .card-grid.cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  /* 5 Karten auf 6 Spalten: Zeile 1 = 3 x 2 Spalten, Zeile 2 = 2 x 3 Spalten.
+     Beide Zeilen sind vollstaendig gefuellt und vertikal symmetrisch — statt
+     der frueheren 3+2-Anordnung mit gebrochener Blockausrichtung. */
+  .card-grid.cols-3.grid-5 { grid-template-columns: repeat(6, minmax(0, 1fr)); }
+  .card-grid.cols-3.grid-5 > * { grid-column: span 2; }
+  .card-grid.cols-3.grid-5 > :nth-child(4),
+  .card-grid.cols-3.grid-5 > :nth-child(5) { grid-column: span 3; }
   .about-grid { grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); }
   .contact-grid { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
   .checklist { display: grid; }

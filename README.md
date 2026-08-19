@@ -18,6 +18,7 @@ datenschutz.html      Datenschutzerklärung nach Art. 13 DSGVO (Vorlage!)
 assets/css/style.css  komplettes Stylesheet (ein einziges, für alle Seiten)
 assets/js/main.js     Navigation, Formular, Calendly-Klick-zu-Laden
 assets/img/           Social-Preview-Bild + Portrait-Platzhalter
+assets/fonts/         Fraunces (Headline-Schrift, lokal ausgeliefert) + OFL-Lizenz
 robots.txt            Suchmaschinen-Anweisungen
 sitemap.xml           Seitenverzeichnis für Google
 .nojekyll             nötig für GitHub Pages
@@ -40,7 +41,7 @@ in einem Editor (VS Code: Cmd+Shift+F) in Sekunden erledigt.
 | `[PLZ ORT]` | impressum (2×), datenschutz (2×) | PLZ + Ort |
 | `[USt-IdNr.]` | impressum (1×) | USt-IdNr. — **oder** die ganze Zeile löschen, falls keine vorhanden ist (im HTML steht daneben eine auskommentierte Kleinunternehmer-Alternative nach § 19 UStG) |
 | `WEB3FORMS_ACCESS_KEY_HIER_EINSETZEN` | index.html (1×) | siehe Schritt 3 |
-| `CALENDLY_URL_HIER_EINSETZEN` | index.html (1×) | siehe Schritt 4 |
+| `CALENDLY_URL_HIER_EINSETZEN` | index.html (2×) | siehe Schritt 4 — einmal für den eingebetteten Kalender, einmal für den Direktlink „Bei Calendly öffnen" |
 
 Außerdem:
 

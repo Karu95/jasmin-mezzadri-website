@@ -161,7 +161,10 @@
             obs.unobserve(entry.target);
           }
         });
-      }, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
+        /* Positiver unterer rootMargin: Elemente blenden ein, BEVOR sie in den
+           Viewport scrollen. Der Inhalt ist beim Ankommen fertig sichtbar, die
+           Animation haelt das Lesen also nicht auf. */
+      }, { rootMargin: '0px 0px 20% 0px', threshold: 0 });
 
       Array.prototype.forEach.call(revealables, function (el) {
         revealObserver.observe(el);
@@ -288,6 +291,9 @@
 
   if (calendlyBtn && calendlyBox && calendlyWidget) {
     var loaded = false;
+    // Ausgangsbeschriftung merken, damit sie nach einem Fehlschlag exakt
+    // wiederhergestellt wird (statt eines abweichenden Literals).
+    var calendlyLabel = calendlyBtn.textContent;
 
     calendlyBtn.addEventListener('click', function () {
       if (loaded) return;
@@ -327,7 +333,7 @@
       script.onerror = function () {
         if (script.parentNode) { script.parentNode.removeChild(script); }
         calendlyBtn.disabled = false;
-        calendlyBtn.textContent = 'Kalender laden';
+        calendlyBtn.textContent = calendlyLabel;
         loaded = false;
         var note = calendlyBox.querySelector('.calendly-note');
         if (note) {

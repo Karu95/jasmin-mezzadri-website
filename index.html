@@ -25,6 +25,7 @@
 <meta name="twitter:image" content="https://[DOMAIN]/assets/img/og-image.png">
 <meta name="twitter:image:alt" content="Wortmarke Jasmin Mezzadri mit dem Leitsatz „Probieren ist nicht das Ziel. Wiederkauf schon.“ auf terrakottafarbenem Hintergrund">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23C2410C'/%3E%3Ctext x='16' y='22' font-family='Arial,Helvetica,sans-serif' font-size='16' font-weight='700' fill='%23FFFDF9' text-anchor='middle'%3EJM%3C/text%3E%3C/svg%3E">
+<link rel="preload" href="assets/fonts/fraunces-var.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="assets/css/style.css">
 <script>(function(d){var r=d.documentElement;r.classList.remove('no-js');r.classList.add('js');setTimeout(function(){if(!window.__jmReady){r.classList.remove('js');}},2500);})(document);</script>
 <script type="application/ld+json">
@@ -258,7 +259,7 @@
         <p class="eyebrow">Leistungen</p>
         <h2 id="leistungen-title">Was ich für Ihre Marke am Point of Sale umsetze.</h2>
       </div>
-      <ul class="card-grid cols-3" role="list">
+      <ul class="card-grid cols-3 grid-5" role="list">
         <li class="card card-service reveal">
           <h3>Aktive Verbraucheransprache</h3>
           <p>Direkter Dialog am Regal statt passiver Präsenz — mit klarer Botschaft, die zum Produkt und zur Einkaufssituation passt.</p>
@@ -452,35 +453,43 @@
             <input type="hidden" name="from_name" value="Website-Kontaktformular">
             <input type="checkbox" name="botcheck" class="hidden" style="display:none" tabindex="-1" autocomplete="off">
 
+            <!-- Pflichtfelder zuerst: die Anfrage ist nach drei Feldern absendbar.
+                 Die optionalen Angaben stehen bewusst darunter und sind als solche
+                 ausgezeichnet, damit die wahrgenommene Huerde niedrig bleibt. -->
             <div class="field">
               <label for="f-name">Name <span class="req" aria-hidden="true">*</span></label>
               <input id="f-name" name="name" type="text" autocomplete="name" required>
-            </div>
-            <div class="field">
-              <label for="f-company">Unternehmen</label>
-              <input id="f-company" name="unternehmen" type="text" autocomplete="organization">
             </div>
             <div class="field">
               <label for="f-email">E-Mail <span class="req" aria-hidden="true">*</span></label>
               <input id="f-email" name="email" type="email" autocomplete="email" required>
             </div>
             <div class="field">
-              <label for="f-phone">Telefon</label>
-              <input id="f-phone" name="telefon" type="tel" autocomplete="tel">
-            </div>
-            <div class="field">
-              <label for="f-topic">Betreff</label>
-              <select id="f-topic" name="betreff">
-                <option>Strategieaustausch</option>
-                <option>Promotion-Personal anfragen</option>
-                <option>Sampling- oder Verkostungsaktion</option>
-                <option>Sonstiges</option>
-              </select>
-            </div>
-            <div class="field">
               <label for="f-message">Nachricht <span class="req" aria-hidden="true">*</span></label>
               <textarea id="f-message" name="nachricht" rows="5" required></textarea>
             </div>
+
+            <fieldset class="field-group">
+              <legend class="field-group-legend">Optional — hilft mir, Ihre Anfrage schneller einzuordnen</legend>
+              <div class="field">
+                <label for="f-company">Unternehmen</label>
+                <input id="f-company" name="unternehmen" type="text" autocomplete="organization">
+              </div>
+              <div class="field">
+                <label for="f-topic">Betreff</label>
+                <select id="f-topic" name="betreff">
+                  <option>Strategieaustausch</option>
+                  <option>Promotion-Personal anfragen</option>
+                  <option>Sampling- oder Verkostungsaktion</option>
+                  <option>Sonstiges</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="f-phone">Telefon</label>
+                <input id="f-phone" name="telefon" type="tel" autocomplete="tel">
+              </div>
+            </fieldset>
+
             <div class="field field-check">
               <input id="f-privacy" name="datenschutz" type="checkbox" value="einverstanden" required>
               <label for="f-privacy">Ich habe die <a href="datenschutz.html">Datenschutzerklärung</a> gelesen und stimme der Verarbeitung meiner Daten zur Bearbeitung meiner Anfrage zu. <span class="req" aria-hidden="true">*</span></label>
@@ -503,7 +512,12 @@
           <h3 class="panel-title">Direkt Termin buchen</h3>
           <div class="calendly-box" id="calendly-box">
             <p class="calendly-note">Beim Laden des Kalenders wird eine Verbindung zu Calendly LLC (USA) hergestellt und Ihre IP-Adresse übertragen. Details in der <a href="datenschutz.html">Datenschutzerklärung</a>.</p>
-            <button class="btn btn-primary" type="button" id="calendly-load">Kalender laden</button>
+            <div class="calendly-actions">
+              <button class="btn btn-primary" type="button" id="calendly-load">Kalender hier laden</button>
+              <!-- Direkter Ausweg: wer den Embed nicht laden will, kommt trotzdem zum Termin.
+                   Der Link fuehrt erst beim Klick zu Calendly — vorher kein Request. -->
+              <a class="btn btn-ghost" href="CALENDLY_URL_HIER_EINSETZEN" target="_blank" rel="noopener noreferrer">Bei Calendly öffnen<span class="sr-only"> (öffnet in neuem Tab)</span></a>
+            </div>
           </div>
           <div class="calendly-inline-widget" id="calendly-widget" data-url="CALENDLY_URL_HIER_EINSETZEN" hidden></div>
 
