@@ -113,6 +113,12 @@ Darunter: Branchen als Tag-Chips
   Lebensmittel & Getränke · FMCG · Functional Food · Health & Lifestyle ·
   Beauty & Care · Produktneuheiten
 
+## SEKTION 4b — PRAXIS AM POS  (id="praxis", zweispaltig: Bild links 3:4, Text rechts)
+Bild: assets/img/praxis.jpg — Jasmin an einem Verkostungsstand im LEH.
+Bewusst ohne Nennung des Auftraggebers; der Bildausschnitt lässt das Markenlogo weg.
+Headline: „Ich stehe selbst am Stand — nicht nur im Konzept."
+Zweck: Belegt die im Ansatz behauptete Nähe zum realen Kaufmoment mit einem echten Bild.
+
 ## SEKTION 6 — ÜBER MICH  (id="ueber-mich", zweispaltig: Bild links, Text rechts)
 Bild: Platzhalter assets/img/jasmin.jpg (mit sichtbarem Platzhalter-Hinweis im Code-Kommentar,
       Alt-Text: "Jasmin Mezzadri, POS-Marketing- und Vertriebsexpertin")
@@ -201,4 +207,4 @@ robots.txt + sitemap.xml.
 
 ## Platzhalter, die Jasmin ausfüllen muss (im README auflisten)
 [DOMAIN], [E-MAIL], [TELEFON], [STRASSE], [PLZ ORT], [USt-IdNr. oder streichen],
-[WEB3FORMS-ACCESS-KEY], [CALENDLY-URL], Portraitfoto.
+[WEB3FORMS-ACCESS-KEY], [CALENDLY-URL].

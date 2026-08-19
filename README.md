@@ -17,7 +17,7 @@ datenschutz.html      Datenschutzerklärung nach Art. 13 DSGVO (Vorlage!)
 404.html              Fehlerseite
 assets/css/style.css  komplettes Stylesheet (ein einziges, für alle Seiten)
 assets/js/main.js     Navigation, Formular, Calendly-Klick-zu-Laden
-assets/img/           Social-Preview-Bild + Portrait-Platzhalter
+assets/img/           Social-Preview-Bild, Portrait, Praxis- und Regalbild (je JPG + WebP, 1x/2x)
 assets/fonts/         Fraunces (Headline-Schrift, lokal ausgeliefert) + OFL-Lizenz
 robots.txt            Suchmaschinen-Anweisungen
 sitemap.xml           Seitenverzeichnis für Google
@@ -45,13 +45,17 @@ in einem Editor (VS Code: Cmd+Shift+F) in Sekunden erledigt.
 
 Außerdem:
 
-- [ ] **Portraitfoto** als `assets/img/jasmin.jpg` ablegen (Hochformat 4:5, ca. 800×1000 px)
-      und in `index.html` beim `<img>` in der Sektion „Über mich" den `src` umstellen.
-      Direkt daneben steht ein Kommentar mit dem passenden `alt`-Text — den bitte
-      mit übernehmen (aktuell steht dort bewusst `alt=""`, weil ein Platzhalterbild
-      keine inhaltliche Bedeutung hat).
-      **Wichtig:** ein *neues* Foto verwenden — das alte Bild von der The-Hostess-Seite
-      gehört ggf. dem Fotografen bzw. der Agentur.
+- [x] **Portraitfoto** eingesetzt (`assets/img/jasmin.jpg`, 4:5, 800×1000 px, dazu
+      `@2x` und WebP). Quelle: `Bilder/Jasmin-Potrait/Portrait smiling 2.jpeg`.
+      **Offen:** schriftlich klären, dass die Nutzungsrechte am Foto bei Jasmin
+      liegen (Fotograf:in).
+- [ ] **Bildrechte prüfen** für die beiden weiteren Motive:
+      `regal.jpg` stammt aus dem Stock-Ordner — Lizenz und ggf. nötiger
+      Bildnachweis müssen belegbar sein. `praxis.jpg` zeigt Jasmin bei einer
+      echten Promotion; der Auftraggeber wird bewusst **nicht** genannt und das
+      Logo ist aus dem Ausschnitt entfernt. Vor dem Livegang trotzdem prüfen,
+      ob die abgebildeten Dritten im Hintergrund unkenntlich genug sind und ob
+      der Markt-/Auftraggeberfreigabe nötig ist (Hausrecht des Marktes).
 - [ ] Prüfen, ob im Impressum eine Berufshaftpflicht o. Ä. anzugeben ist.
 - [ ] Beide Rechtstexte sind **Vorlagen** — vor dem Livegang von einer Anwältin/
       einem Anwalt oder der IHK prüfen lassen. Der Hinweis steht auch als Kommentar
@@ -197,7 +201,7 @@ auskommentierter Referenz-/Logo-Block in `index.html` zwischen „Leistungen" un
 Kommentar entfernt und Inhalt eingesetzt werden.
 
 Sinnvolle Reihenfolge:
-1. Echtes Portraitfoto (wirkt bei Einzelanbieterinnen am stärksten)
+1. ~~Echtes Portraitfoto~~ — erledigt
 2. 2–3 anonymisierte Fallbeispiele („Functional-Food-Marke, Verkostung in X Märkten, …")
 3. 1–2 Zitate von Auftraggebern, sobald eine Freigabe vorliegt
 4. Markenlogos — nur mit ausdrücklicher schriftlicher Freigabe
