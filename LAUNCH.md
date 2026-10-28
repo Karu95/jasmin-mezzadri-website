@@ -33,7 +33,7 @@ Die Domain `[DOMAIN]` ist überall durch `www.mesmerizing.eu` ersetzt — canoni
 - **Rechtstexte prüfen lassen** (Anwältin oder IHK) — Impressum und Datenschutzerklärung sind Vorlagen.
 - **AV-Vertrag nach Art. 28 DSGVO** bei Web3Forms anfordern (US-Server).
 - **Nutzungsrechte Portrait klären** — eingebunden ist Jasmins echtes Foto (`Portrait smiling 2.jpeg`); offen ist nur die schriftliche Nutzungsfreigabe der Fotografin bzw. des Fotografen.
-- **og-image** trägt die Wortmarke „Jasmin Mezzadri". Passt weiterhin, da Jasmin Mezzadri der Absender bleibt. Wenn MESMERIZING später sichtbarer werden soll, muss `assets/img/og-image.svg` neu gerendert und als PNG exportiert werden.
+- **og-image** trägt die Wortmarke „Jasmin Mezzadri". Passt weiterhin, da Jasmin Mezzadri der Absender bleibt. Seit 2.0 in Mint, gerendert per PIL (Skript nicht im Repo; `og-image.svg` ist farblich angeglichen, aber nicht die Quelle des PNG).
 
 ## 4. Bewusst nicht umgesetzt (siehe `Feedback-Triage.md`)
 

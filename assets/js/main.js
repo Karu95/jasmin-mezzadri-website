@@ -35,7 +35,7 @@
   var header = document.getElementById('site-header');
   var toggle = document.getElementById('nav-toggle');
   var nav = document.getElementById('site-nav');
-  var DESKTOP = '(min-width: 900px)';
+  var DESKTOP = '(min-width: 1040px)';
 
   // Bereiche, die bei offenem Overlay nicht per Tab erreichbar sein dürfen.
   function backgroundRegions() {

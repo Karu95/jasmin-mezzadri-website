@@ -102,9 +102,26 @@ Lizenzkostenfrei über SIL-OFL-Schriften (z. B. Inter, Source Sans, Fraunces).
 ## Prinzip 6 — Der Farbsatz ist noch unvollständig [VI]
 
 [VI] fordert 2–4 Farben, definiert für **Print und Screen getrennt**, hergeleitet
-aus den Markenwerten. Terracotta `#C2410C` liegt zwischen Orange
-(„Komfort, Sicherheit, Aktivierung") und Braun („Seriosität, Wärme, Verlässlichkeit")
-und passt inhaltlich gut zu POS- und FMCG-Beratung.
+aus den Markenwerten.
+
+**Stand 2.0 (28.10.2026): Mint-Palette statt Terracotta** — Entscheidung von Karu
+(Gestaltungswunsch, *nicht* mit [UX] begründet, siehe Prinzip 3). Tokens in `style.css`:
+
+| Rolle | Token | Wert |
+|---|---|---|
+| Tinte (Text) | `--ink` | `#13211D` |
+| Salbeigrau (Fließtext) | `--ink-soft` | `#4B5D57` |
+| Papier | `--paper` | `#FAFCFA` |
+| Nebel (alternierende Sektion) | `--paper-alt` | `#EEF5F1` |
+| Mint (Flächen: Kontakt, Zitat, Chips) | `--mint` | `#DDF1E8` |
+| Mint tief (nur dekorativ) | `--mint-deep` | `#BFE3D3` |
+| Tannenmint (Akzent: Buttons, Fokus) | `--accent` / `--accent-dk` | `#1E6E5A` / `#155343` |
+| Fehler | `--danger` | `#B3261E` |
+
+Kontraste sind im CSS kommentiert (Text ≥ 4,5:1, Bedienrahmen ≥ 3:1 auch auf Mint).
+Mint und Tannenmint sind benachbarte Farbtöne mit niedriger Sättigung — passt zur
+Dimension „Farbe" aus Prinzip 2. Die hellen Mint-Töne sind Flächenfarben; die
+10-%-Regel unten gilt für den kräftigen Akzent `--accent`.
 
 Es fehlen aber, gemessen an [VI]:
 
@@ -112,7 +129,7 @@ Es fehlen aber, gemessen an [VI]:
 2. **Pantone-Näherung** als druckübergreifender Anker
 3. **Graustufen-Entsprechung** für S/W-Druck
 4. **Eine gedeckte Sekundärfarbe** — aktuell gibt es nur Abstufungen des Akzents; für Diagramme, Tabellen und Kategorien in Präsentationen reicht das nicht
-5. **Signalfarben** für Erfolg/Fehler/Warnung *(nicht aus [VI] — 2016 kennt keine UI-Zustände)*. Wichtig: Ein rot-oranger Fehlerzustand kollidiert mit `#C2410C`; nötig ist ein entsättigtes Rot (~`#B3261E`)
+5. **Signalfarben** für Erfolg/Fehler/Warnung *(nicht aus [VI] — 2016 kennt keine UI-Zustände)*. Wichtig: Fehler in entsättigtem Rot `--danger: #B3261E` (seit 2.0 als Token angelegt)
 6. **Eine Regel gegen Fehlgebrauch** — Akzent nicht als Fließtextfarbe, nicht großflächig unter Fotos
 
 Als Flächenregel gilt: **Akzentfarbe maximal etwa 10 % der Fläche.**
@@ -158,14 +175,14 @@ Unabhängig von allen Quellen gelten weiterhin:
 
 **Mittlere Priorität**
 
-- [ ] Echtes Portrait groß einsetzen, als `<picture>` mit AVIF/WebP und `srcset`
+- [x] Echtes Portrait groß einsetzen — seit 2.0 im Hero (`<picture>`, WebP/JPG, 1x/2x)
 - [ ] Wortmarke als SVG mit in Pfade konvertierter Schrift
 - [ ] Farbsatz vervollständigen: CMYK, Pantone-Näherung, Graustufe, Sekundärfarbe, Signalfarben
 - [ ] Mini-Styleguide (8–10 Seiten) nach der Gliederung aus [VI]
 
 **Niedrige Priorität**
 
-- [ ] `og-image.png` komprimieren (aktuell 272 KB)
+- [x] `og-image.png` neu in Mint gerendert (PIL + lokale Fraunces), 47 KB
 - [ ] `text-wrap: pretty` für Fließtext
 - [ ] `content-visibility: auto` für Sektionen unterhalb des Folds — vorher auf Mobilgeräten testen, falsche `contain-intrinsic-size` erzeugt Scroll-Sprünge
 
@@ -173,4 +190,19 @@ Unabhängig von allen Quellen gelten weiterhin:
 
 - „Intention to reuse" optimieren — für einen One-Pager bedeutungslos (Prinzip 3)
 - Container Queries für `.card-grid` — `repeat(auto-fit, minmax(…))` erfüllt denselben Zweck einfacher
-- Farbwechsel auf Basis von [UX] — der Farbbefund ist nicht auf Terracotta übertragbar
+- Farbwahl mit [UX] begründen — der Farbbefund (Grün/Rot vs. Blau/Gelb) ist auch für Mint kein Beleg
+
+---
+
+## Version 2.0 der Startseite (28.10.2026)
+
+Ziel: individueller statt Vorlagen-Look, ohne Inhalte zu ändern (Texte, FAQ, JSON-LD unverändert).
+
+- **Hero mit Portrait** (versetzte Mint-Fläche, Namensschild) — für eine Solo-Beraterin ist die Person die Leistung (R9)
+- **Problem:** Symptomliste neben dem Regalbild statt drei gleicher Karten
+- **Ansatz:** Prozesslinie mit Stationen (mobil senkrecht, ab 900 px waagerecht); Zitat als Mint-Panel
+- **Leistungen:** vier Stufen als zusammenhängende Tafel mit Ziffern 01–04 (2×2, symmetrisch)
+- **Für wen / Über mich / FAQ:** Editorial-Raster — Überschrift links (sticky), Inhalt rechts
+- **Überzeilen** in Satzschreibung mit Mint-Strich statt Versalien
+- **Bedienreibung behoben:** Desktop-Navigation erst ab 1040 px, darunter Menü-Button (vorher brachen die Menüpunkte zwischen 900 und ~1050 px zweizeilig um)
+- CSS/JS mit `?v=2` eingebunden, damit Besucher nach dem Deploy nicht das alte Stylesheet aus dem Cache sehen — bei künftigen größeren CSS-Änderungen hochzählen

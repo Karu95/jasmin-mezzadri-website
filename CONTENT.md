@@ -11,7 +11,7 @@ sprachlich geglättet und für Conversion/SEO leicht optimiert.
 --ink-soft:   #5C544B   (Sekundärtext)
 --paper:      #FFFDF9   (Seitenhintergrund, warmes Weiß)
 --paper-alt:  #F5F0E8   (abgesetzte Sektionen)
---accent:     #C2410C   (warmes Terracotta/Orange — CTAs, Akzente)
+--accent:     #1E6E5A   (Tannenmint — seit 2.0, Tokens siehe style.css)
 --accent-dk:  #9A330A   (Hover)
 --accent-sft: #FDEDE4   (Akzent-Flächen, Badges)
 --line:       #E4DCD0   (Rahmen/Trenner)
