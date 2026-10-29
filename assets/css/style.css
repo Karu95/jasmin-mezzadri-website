@@ -2,6 +2,8 @@
    Jasmin Mezzadri — POS Marketing & Vertrieb
    Ein Stylesheet für alle Seiten. Mobile-first.
    Version 2.0 (28.10.2026): Mint-Palette, Hero mit Portrait, Editorial-Raster.
+   2.1: ohne Haarlinien, Schatten, Verläufe und Überzeilen — Flächen trennen
+   sich über Tonstufen, Gliederung über Abstand und Größe (taste-skill-Audit).
    ========================================================================== */
 
 /* --- 1. Design-Tokens --------------------------------------------------- */
@@ -121,11 +123,8 @@ h1, h2, h3, h4 {
   hyphens: auto;
 }
 
-h1 { font-size: clamp(2.4rem, 5.6vw, 4.1rem); letter-spacing: -0.03em; line-height: 1.06; }
-/* Zweiter Satz der H1 in Akzentfarbe. Fraunces liegt nur aufrecht vor —
-   kein synthetisches Kursiv. Große Schrift, daher reicht 3:1 (hier 5.9:1). */
-h1 em { font-style: normal; color: var(--accent); }
-h2 { font-size: clamp(1.65rem, 3.4vw, 2.45rem); letter-spacing: -0.02em; }
+h1 { font-size: clamp(2.4rem, 7vw, 5.6rem); letter-spacing: -0.035em; line-height: 1.02; }
+h2 { font-size: clamp(2rem, 4.4vw, 3.4rem); letter-spacing: -0.03em; line-height: 1.05; }
 h3 {
   font-family: var(--font-sans);
   font-weight: 700;
@@ -187,33 +186,15 @@ li { list-style: none; }
 ::selection { background: var(--accent-sft); color: var(--ink); }
 
 /* --- 4. Eyebrow / typografische Details --------------------------------- */
-/* 2.0: Satzschreibung statt Versalien-Zeile — ruhiger, weniger Schablone. */
-.eyebrow {
-  display: flex;
-  align-items: center;
-  gap: var(--sp-3);
-  margin: 0 0 var(--sp-4);
-  font-size: 0.9rem;
-  font-weight: 600;
-  letter-spacing: 0.01em;
-  color: var(--accent-dk);
-}
-.eyebrow::before {
-  content: "";
-  flex: 0 0 auto;
-  width: 22px; height: 3px;
-  border-radius: 2px;
-  background: var(--mint-deep);
-}
-
+/* Laufender Text in voller Tinte; --ink-soft nur für Nebeninformation. */
 .lead {
-  font-size: clamp(1.06rem, 1.9vw, 1.25rem);
-  color: var(--ink-soft);
+  font-size: clamp(1.1rem, 1.9vw, 1.3rem);
+  color: var(--ink);
   max-width: 62ch;
 }
 
 .section-text {
-  color: var(--ink-soft);
+  color: var(--ink);
   max-width: 68ch;
   font-size: 1.03rem;
 }
@@ -241,10 +222,24 @@ li { list-style: none; }
 .btn-primary {
   background: var(--accent);
   color: var(--paper);
-  box-shadow: var(--shadow-sm);
 }
-.btn-primary:hover { background: var(--accent-dk); color: var(--paper); transform: translateY(-1px); box-shadow: var(--shadow-md); }
-.btn-primary:active, .btn-ghost:active { transform: translateY(1px); box-shadow: none; }
+.btn-primary:hover { background: var(--accent-dk); color: var(--paper); }
+.btn-primary:active, .btn-ghost:active { transform: translateY(1px); }
+
+/* Zweite Aktion als Textlink statt zweitem Button */
+.text-link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  color: var(--accent-dk);
+  font-weight: 600;
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-decoration-color: var(--mint-deep);
+  text-underline-offset: 0.3em;
+  transition: text-decoration-color 0.18s var(--ease);
+}
+.text-link:hover { color: var(--accent-dk); text-decoration-color: var(--accent); }
 
 .btn-ghost {
   background: transparent;
@@ -262,17 +257,12 @@ li { list-style: none; }
   position: sticky;
   top: 0;
   z-index: 100;
-  background: transparent;
-  border-bottom: 1px solid transparent;
+  background: var(--paper);
   transition: background-color 0.25s var(--ease), border-color 0.25s var(--ease),
               box-shadow 0.25s var(--ease);
 }
-.site-header.is-scrolled {
-  background: rgba(250, 252, 250, 0.92);
-  -webkit-backdrop-filter: saturate(140%) blur(10px);
-  backdrop-filter: saturate(140%) blur(10px);
-  border-bottom-color: var(--line);
-}
+/* Einziger Schatten der Seite: die Leiste schwebt beim Scrollen über dem Inhalt. */
+.site-header.is-scrolled { box-shadow: var(--shadow-sm); } /* taste-skill-ignore: sticky bar */
 
 .header-inner {
   min-height: var(--header-h);
@@ -350,9 +340,8 @@ li { list-style: none; }
   display: block;
   white-space: nowrap;
   padding: var(--sp-3) 0;
-  border-bottom: 1px solid var(--line);
   color: var(--ink);
-  font-size: 1.15rem;
+  font-size: 1.35rem;
   font-weight: 600;
   text-decoration: none;
 }
@@ -363,12 +352,7 @@ li { list-style: none; }
 body.nav-open { overflow: hidden; }
 
 /* Bei offenem Overlay darf der Hero nicht durch den Header scheinen */
-.site-header.nav-open {
-  background: var(--paper);
-  -webkit-backdrop-filter: none;
-  backdrop-filter: none;
-  border-bottom-color: var(--line);
-}
+.site-header.nav-open { background: var(--paper); }
 
 /* Ohne JavaScript ist das Overlay nicht bedienbar → Navigation statisch zeigen */
 /* Ohne JS wird .is-scrolled nie gesetzt: der sticky Header bliebe transparent und
@@ -404,48 +388,36 @@ body.nav-open { overflow: hidden; }
 .section-cta { margin-top: clamp(2rem, 4vw, 3rem); }
 
 /* --- 8. Hero ------------------------------------------------------------ */
-.hero {
-  padding-block: clamp(2.5rem, 7vw, 6rem) clamp(3.5rem, 8vw, 6.5rem);
-  background:
-    radial-gradient(70ch 50ch at 100% 0%, var(--accent-sft) 0%, rgba(230, 244, 238, 0) 70%),
-    var(--paper);
-}
-.hero-grid { display: grid; gap: clamp(2.5rem, 6vw, 4.5rem); align-items: center; }
-.hero-inner { max-width: 62ch; }
-.hero h1 { margin-bottom: var(--sp-5); }
+.hero { padding-block: clamp(2rem, 6vw, 5rem) clamp(4rem, 9vw, 8rem); background: var(--paper); }
+.hero-grid { display: grid; gap: clamp(2rem, 5vw, 4rem); align-items: start; }
+.hero h1 { margin: 0; max-width: 18ch; }
+.hero-inner { max-width: 54ch; }
 .hero .lead { margin-bottom: var(--sp-7); }
 
 .hero-actions {
   display: flex;
   flex-wrap: wrap;
-  gap: var(--sp-3);
-  margin-bottom: var(--sp-6);
+  align-items: center;
+  gap: var(--sp-3) var(--sp-6);
+  margin-bottom: var(--sp-8);
 }
 
 .trustline {
   display: flex;
   flex-wrap: wrap;
-  gap: var(--sp-2) var(--sp-5);
+  gap: var(--sp-2) var(--sp-6);
   margin: 0;
-  padding-top: var(--sp-5);
-  border-top: 1px solid var(--line);
-  font-size: 0.88rem;
+  font-size: 0.92rem;
   color: var(--ink-soft);
 }
-.trustline li { display: inline-flex; align-items: center; gap: var(--sp-2); }
-.trustline li::before {
-  content: "";
-  width: 7px; height: 7px;
-  border-radius: 2px;
-  background: var(--mint-deep);
-}
+.trustline .trust-link { color: var(--ink-soft); text-decoration: underline; text-underline-offset: 0.2em; }
+.trustline .trust-link:hover { color: var(--accent-dk); }
 
-/* Portrait: Mint-Fläche versetzt dahinter erzeugt Tiefe ohne Schatten-Effekt. */
+/* Portrait: Mint-Fläche versetzt dahinter erzeugt Tiefe ohne Schatten. */
 .hero-media {
   position: relative;
   margin: 0 var(--sp-5) var(--sp-5) 0;
-  max-width: 440px;
-  justify-self: center;
+  max-width: 460px;
   width: 100%;
 }
 .hero-media::before {
@@ -463,95 +435,30 @@ body.nav-open { overflow: hidden; }
   border-radius: var(--radius-lg);
   background: var(--paper-alt);
 }
-.hero-tag {
-  position: absolute;
-  /* mobil nur leicht überstehend, sonst ragt das Schild über den Seitenrand */
-  left: calc(var(--sp-2) * -1);
-  bottom: var(--sp-7);
-  display: grid;
-  gap: 2px;
-  padding: var(--sp-3) var(--sp-4);
-  background: var(--paper);
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
-  box-shadow: var(--shadow-md);
-  font-size: 0.82rem;
-  color: var(--ink-soft);
-  line-height: 1.35;
-}
-.hero-tag strong { font-family: var(--font-display); font-weight: 600; font-size: 1rem; color: var(--ink); }
 
-/* --- 9. Karten ---------------------------------------------------------- */
-.card-grid { display: grid; gap: var(--sp-4); }
+/* --- 9. Leistungen & Symptome ------------------------------------------- */
+.card-grid { display: grid; gap: var(--sp-8) clamp(2rem, 5vw, 4rem); }
+.card-grid + .section-text { margin-top: var(--sp-9); }
+.card h3 { margin-bottom: var(--sp-3); }
+.card p { color: var(--ink); margin: 0; }
 
-.card {
-  background: var(--paper);
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
-  padding: clamp(1.35rem, 2.4vw, 1.85rem);
-  transition: transform 0.22s var(--ease), box-shadow 0.22s var(--ease),
-              border-color 0.22s var(--ease);
+/* Leistungen: vier Stufen ohne Kästen. Die dicke Mint-Kante über jeder Stufe
+   ist die Regalkante — das Bild, um das es auf der ganzen Seite geht.
+   Die Reihenfolge trägt die Position, keine Ziffern. */
+.card-service {
+  padding-top: var(--sp-5);
+  border-top: 6px solid var(--mint-deep);
+  transition: border-color 0.2s var(--ease);
 }
-.card:hover { border-color: var(--mint-deep); }
-.card h3 { margin-bottom: var(--sp-2); }
-.card p { color: var(--ink-soft); font-size: 0.96rem; margin: 0; }
+.card-service:hover { border-top-color: var(--accent); }
+.card-service h3 { font-family: var(--font-display); font-weight: 600; font-size: clamp(1.4rem, 2.2vw, 1.75rem); letter-spacing: -0.02em; }
 
-.card-icon {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 44px; height: 44px;
-  margin-bottom: var(--sp-4);
-  border-radius: var(--radius);
-  background: var(--mint);
-  color: var(--accent-dk);
-}
-
-/* Leistungen 2.0: vier Stufen als zusammenhängende Tafel statt vier
-   schwebender Karten — die Stufen gehören zusammen, also teilen sie Kanten.
-   Die Linien entstehen aus dem 1px-Gap über dem Hintergrund der Liste. */
-.card-grid.quad {
-  gap: 1px;
-  background: var(--line);
-  border: 1px solid var(--line);
-  border-radius: var(--radius-lg);
-  overflow: hidden;
-  counter-reset: stufe;
-}
-.card-grid.quad .card {
-  border: 0;
-  border-radius: 0;
-  padding: clamp(1.5rem, 3vw, 2.5rem);
-  transition: background-color 0.22s var(--ease);
-}
-.card-grid.quad .card:hover { background: var(--accent-sft); }
-.card-service { position: relative; }
-.card-service::before {
-  counter-increment: stufe;
-  content: "0" counter(stufe);
-  display: block;
-  margin-bottom: var(--sp-4);
-  font-family: var(--font-display);
-  font-size: 2.2rem;
-  font-weight: 500;
-  line-height: 1;
-  color: var(--accent);
-  font-variant-numeric: tabular-nums;
-}
-
-/* Problem 2.0: Symptomliste neben dem Regalbild statt drei gleicher Karten */
-.problem-grid { display: grid; gap: clamp(2rem, 4vw, 3.5rem); align-items: center; }
-.symptoms { border-top: 1px solid var(--line); }
-.symptom {
-  display: grid;
-  grid-template-columns: auto minmax(0, 1fr);
-  column-gap: var(--sp-4);
-  padding: var(--sp-5) 0;
-  border-bottom: 1px solid var(--line);
-}
-.symptom .card-icon { grid-row: span 2; margin: 0; }
-.symptom h3 { margin-bottom: var(--sp-1); }
-.symptom p { margin: 0; color: var(--ink-soft); font-size: 0.97rem; }
+/* Problem: Symptomliste neben dem Regalbild */
+.problem-grid { display: grid; gap: clamp(2.5rem, 5vw, 4rem); align-items: center; }
+.symptoms { display: grid; gap: var(--sp-7); }
+.symptom { padding-left: var(--sp-5); border-left: 6px solid var(--mint-deep); }
+.symptom h3 { margin-bottom: var(--sp-2); font-family: var(--font-display); font-weight: 600; font-size: clamp(1.35rem, 2vw, 1.6rem); letter-spacing: -0.02em; }
+.symptom p { margin: 0; color: var(--ink); }
 
 /* --- 10. Schritte ------------------------------------------------------- */
 /* 2.0: Prozesslinie. Mobil senkrecht (Linie links), ab 900px waagerecht —
@@ -570,26 +477,19 @@ body.nav-open { overflow: hidden; }
   background: var(--mint-deep);
   border-radius: 2px;
 }
+/* Station: gefülltes Quadrat auf der Linie; die Reihenfolge zeigt die Linie. */
 .step { position: relative; }
-.step-num {
+.step::before {
+  content: "";
   position: absolute;
-  left: calc((46px + var(--sp-5)) * -1);
-  top: -4px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 46px; height: 46px;
-  border-radius: var(--radius);
-  background: var(--paper);
-  border: 2px solid var(--mint-deep);
-  color: var(--accent-dk);
-  font-family: var(--font-display);
-  font-size: 1rem;
-  font-weight: 600;
-  font-variant-numeric: tabular-nums;
+  left: calc((46px + var(--sp-5)) * -1 + 13px);
+  top: 4px;
+  width: 20px; height: 20px;
+  border-radius: 6px;
+  background: var(--accent);
 }
-.step-body h3 { margin-bottom: var(--sp-2); }
-.step-body p { color: var(--ink-soft); margin: 0; max-width: 62ch; }
+.step-body h3 { margin-bottom: var(--sp-2); font-family: var(--font-display); font-weight: 600; font-size: clamp(1.35rem, 2vw, 1.6rem); letter-spacing: -0.02em; }
+.step-body p { color: var(--ink); margin: 0; max-width: 62ch; }
 
 .pullquote {
   margin: clamp(3rem, 6vw, 5rem) 0 0;
@@ -602,25 +502,39 @@ body.nav-open { overflow: hidden; }
   max-width: 26ch;     /* ch hier relativ zur großen Zitat-Schrift */
   margin: 0;
   font-family: var(--font-display);
-  font-size: clamp(1.5rem, 3.4vw, 2.4rem);
+  font-size: clamp(1.4rem, 3vw, 2.2rem);   /* Aussage, keine Headline: max. ~35px */
   font-weight: 500;
   line-height: 1.22;
   letter-spacing: -0.02em;
   text-wrap: balance;
 }
 
-/* --- 11. Checkliste & Chips --------------------------------------------- */
-.checklist { display: grid; gap: 0; max-width: 68ch; }
-.checklist li {
+/* --- 11. Situationen & Chips ------------------------------------------- */
+/* Jede Situation ist ein Link zum vorausgefüllten Formular (main.js, 5b). */
+.checklist { display: grid; gap: var(--sp-2); }
+.situation {
   display: flex;
+  flex-direction: column;     /* mobil: Hinweis unter dem Satz, ab 640px daneben */
   align-items: flex-start;
-  gap: var(--sp-3);
-  padding: var(--sp-4) 0;
-  border-bottom: 1px solid var(--line);
+  justify-content: space-between;
+  gap: var(--sp-2) var(--sp-5);
+  padding: var(--sp-4) var(--sp-5);
+  border-radius: var(--radius);
+  background: var(--paper-alt);
+  color: var(--ink);
   font-size: 1.03rem;
+  text-decoration: none;
+  transition: background-color 0.18s var(--ease);
 }
-.checklist li:first-child { border-top: 1px solid var(--line); }
-.checklist .check { flex: 0 0 auto; color: var(--accent); margin-top: 0.2rem; }
+.situation:hover { background: var(--mint); color: var(--ink); }
+.situation-cta {
+  flex: 0 0 auto;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--accent-dk);
+  white-space: nowrap;
+}
+.situation:hover .situation-cta { text-decoration: underline; text-underline-offset: 0.25em; }
 
 .chips-title {
   margin: clamp(2.25rem, 4vw, 3rem) 0 var(--sp-4);
@@ -644,7 +558,9 @@ body.nav-open { overflow: hidden; }
    Genutzt von „Für wen", „Über mich" und FAQ. */
 .split { display: grid; gap: var(--sp-6); align-items: start; }
 .split .section-head { margin-bottom: 0; }
-.about-body p { color: var(--ink-soft); max-width: 62ch; }
+/* Schmalere Spalte → kleinere H2, damit sie bei zwei Zeilen bleibt */
+.split-head h2 { font-size: clamp(2rem, 3.2vw, 2.75rem); }
+.about-body p { color: var(--ink); max-width: 62ch; }
 
 .pillars-title {
   margin: clamp(1.75rem, 3vw, 2.25rem) 0 var(--sp-4);
@@ -653,14 +569,15 @@ body.nav-open { overflow: hidden; }
   letter-spacing: 0.01em;
   color: var(--ink-soft);
 }
-.pillars { display: grid; gap: var(--sp-3); }
+.pillars { display: grid; gap: var(--sp-4) var(--sp-6); }
 .pillars li {
-  padding: var(--sp-4) var(--sp-5);
-  border-radius: var(--radius);
-  background: var(--paper);
-  border-left: 3px solid var(--mint-deep);
+  padding-left: var(--sp-4);
+  border-left: 6px solid var(--mint-deep);
+  font-family: var(--font-display);
   font-weight: 600;
-  font-size: 0.97rem;
+  font-size: 1.2rem;
+  line-height: 1.25;
+  letter-spacing: -0.015em;
 }
 
 .social-links { display: flex; flex-wrap: wrap; gap: var(--sp-3); margin-top: var(--sp-6); }
@@ -668,21 +585,22 @@ body.nav-open { overflow: hidden; }
   display: inline-flex;
   align-items: center;
   gap: var(--sp-2);
-  padding: 0.5rem 1rem;
-  border: 1px solid var(--line);
+  min-height: 44px;
+  padding: 0.5rem 1.1rem;
   border-radius: var(--radius-pill);
-  background: var(--paper);
+  background: var(--mint);
   color: var(--ink);
   font-size: 0.9rem;
   font-weight: 600;
   text-decoration: none;
   transition: border-color 0.18s var(--ease), color 0.18s var(--ease);
 }
-.social-link:hover { border-color: var(--accent); color: var(--accent-dk); background: var(--accent-sft); }
+.social-link:hover { color: var(--accent-dk); background: var(--mint-deep); }
 
 /* --- 13. FAQ ------------------------------------------------------------ */
-.faq { border-top: 1px solid var(--line); }
-.faq-item { border-bottom: 1px solid var(--line); }
+.faq { display: grid; gap: var(--sp-2); }
+.faq-item { border-radius: var(--radius); background: var(--paper-alt); padding-inline: var(--sp-5); transition: background-color 0.18s var(--ease); }
+.faq-item[open] { background: var(--accent-sft); }
 .faq-item summary {
   display: flex;
   align-items: flex-start;
@@ -702,7 +620,7 @@ body.nav-open { overflow: hidden; }
   flex: 0 0 auto;
   width: 28px; height: 28px;
   border-radius: var(--radius-sm);
-  background: var(--mint);
+  background: var(--paper);
   transition: background-color 0.2s var(--ease);
 }
 .faq-item[open] .faq-icon { background: var(--mint-deep); }
@@ -720,24 +638,23 @@ body.nav-open { overflow: hidden; }
 .faq-item[open] .faq-icon::after { transform: translate(-50%, -50%) scaleY(0); opacity: 0; }
 
 .faq-answer { padding-bottom: var(--sp-5); max-width: 68ch; }
-.faq-answer p { color: var(--ink-soft); margin: 0; }
+.faq-answer p { color: var(--ink); margin: 0; }
 
 /* --- 14. Kontakt / Formular --------------------------------------------- */
 .contact-grid { display: grid; gap: clamp(2rem, 4vw, 3rem); align-items: start; }
 
 .contact-col {
   background: var(--paper);
-  border: 1px solid var(--line);
   border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-sm);
   padding: clamp(1.35rem, 3vw, 2.25rem);
 }
 
 .panel-title {
   margin-bottom: var(--sp-5);
-  padding-bottom: var(--sp-3);
-  border-bottom: 1px solid var(--line);
-  font-size: 1.05rem;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.5rem;
+  letter-spacing: -0.02em;
 }
 
 .field { margin-bottom: var(--sp-4); }
@@ -773,7 +690,7 @@ body.nav-open { overflow: hidden; }
 }
 .field input:focus, .field select:focus, .field textarea:focus {
   border-color: var(--accent);
-  box-shadow: 0 0 0 3px var(--accent-sft);
+  box-shadow: 0 0 0 3px var(--accent-sft); /* taste-skill-ignore: Fokus eines Formularfelds */
 }
 .field input:user-invalid, .field textarea:user-invalid { border-color: var(--danger); }
 
@@ -802,9 +719,10 @@ body.nav-open { overflow: hidden; }
    vollstaendige, absendbare Anfrage lesbar sind. */
 .field-group {
   margin: var(--sp-5) 0 0;
-  padding: var(--sp-4) 0 0;
+  padding: var(--sp-5);
   border: 0;
-  border-top: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--paper-alt);
 }
 .field-group-legend {
   padding: 0;
@@ -821,7 +739,6 @@ body.nav-open { overflow: hidden; }
   padding: var(--sp-3) var(--sp-4);
   border-radius: var(--radius-sm);
   background: var(--accent-sft);
-  border: 1px solid var(--line);
   color: var(--ink);
 }
 .form-status.is-error {
@@ -835,7 +752,6 @@ body.nav-open { overflow: hidden; }
 /* Calendly */
 .calendly-box {
   padding: clamp(1.25rem, 3vw, 1.75rem);
-  border: 1px dashed var(--line);
   border-radius: var(--radius);
   background: var(--paper-alt);
   text-align: left;
@@ -845,14 +761,13 @@ body.nav-open { overflow: hidden; }
 .calendly-actions .btn { flex: 1 1 auto; justify-content: center; }
 .calendly-inline-widget { min-height: 680px; margin-top: var(--sp-2); }
 
-.contact-direct { margin-top: var(--sp-6); border-top: 1px solid var(--line); }
+.contact-direct { margin-top: var(--sp-6); display: grid; gap: var(--sp-1); }
 .contact-direct li {
   display: flex;
   align-items: center;
   gap: var(--sp-3);
-  padding: var(--sp-3) 0;
-  border-bottom: 1px solid var(--line);
-  font-size: 0.94rem;
+  padding: var(--sp-2) 0;
+  font-size: 0.97rem;
 }
 .contact-direct svg { flex: 0 0 auto; color: var(--accent-dk); }
 .contact-direct a { color: var(--ink); text-decoration: none; word-break: break-word; }
@@ -860,12 +775,19 @@ body.nav-open { overflow: hidden; }
 
 /* --- 15. Footer --------------------------------------------------------- */
 .site-footer {
-  padding-block: var(--sp-8);
-  border-top: 4px solid var(--mint);
+  padding-block: var(--sp-9) var(--sp-8);
   background: var(--paper);
 }
 .footer-inner { display: grid; gap: var(--sp-5); }
-.footer-name { margin: 0 0 var(--sp-2); font-family: var(--font-display); font-weight: 600; font-size: 1.25rem; letter-spacing: -0.02em; }
+/* Der Name kehrt am Ende groß zurück — Abschluss statt Linkfarm. */
+.footer-name {
+  margin: 0 0 var(--sp-4);
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(2.6rem, 9vw, 7.5rem);
+  line-height: 0.95;
+  letter-spacing: -0.04em;
+}
 .footer-hint { margin: 0; font-size: 0.87rem; color: var(--ink-soft); max-width: 46ch; }
 .footer-nav ul { display: flex; flex-wrap: wrap; gap: var(--sp-2) var(--sp-5); }
 .footer-nav a { color: var(--ink); font-size: 0.9rem; text-decoration: none; }
@@ -874,8 +796,8 @@ body.nav-open { overflow: hidden; }
 
 /* --- 16. Rechtstexte (Impressum / Datenschutz / 404) -------------------- */
 .page-head {
-  padding-block: clamp(2.5rem, 7vw, 5rem) clamp(1.5rem, 3vw, 2.5rem);
-  border-bottom: 1px solid var(--line);
+  padding-block: clamp(2.5rem, 7vw, 5rem) clamp(2rem, 4vw, 3rem);
+  background: var(--paper-alt);
 }
 .legal { max-width: 72ch; padding-block: clamp(2.5rem, 6vw, 4rem); }
 .legal h2 {
@@ -892,7 +814,7 @@ body.nav-open { overflow: hidden; }
 .legal dd { margin: 0 0 var(--sp-3); color: var(--ink-soft); }
 .legal a { word-break: break-word; }
 .legal .meta { font-size: 0.85rem; color: var(--ink-soft); }
-.legal hr { border: 0; border-top: 1px solid var(--line); margin: var(--sp-7) 0; }
+.legal hr { border: 0; border-top: 1px solid var(--line); margin: var(--sp-7) 0; } /* taste-skill-ignore: Gliederung im Rechtstext */
 
 .error-page { padding-block: clamp(4rem, 12vw, 9rem); text-align: left; }
 .error-code {
@@ -917,7 +839,7 @@ body.nav-open { overflow: hidden; }
 .js .reveal.is-visible { opacity: 1; transform: none; }
 
 /* --- 17b. Referenz-/Logo-Block (Markup liegt auskommentiert in index.html) --- */
-.refs { padding-block: var(--section-y); border-top: 1px solid var(--line); }
+.refs { padding-block: var(--section-y); }
 .refs-title {
   margin-bottom: var(--sp-6);
   font-size: 0.9rem;
@@ -950,7 +872,7 @@ body.nav-open { overflow: hidden; }
 .refs-note { margin-top: var(--sp-5); text-align: center; font-size: 0.82rem; color: var(--ink-soft); }
 
 /* --- 17c. Prozess-Panel „Was nach Ihrer Anfrage passiert" ------------------ */
-.next-steps { margin-top: var(--sp-6); padding-top: var(--sp-5); border-top: 1px solid var(--line); }
+.next-steps { margin-top: var(--sp-7); }
 .next-steps-title {
   margin-bottom: var(--sp-4);
   font-size: 0.9rem;
@@ -983,7 +905,6 @@ body.nav-open { overflow: hidden; }
 }
 
 /* --- 17d. Kleine Inline-CTAs ---------------------------------------------- */
-.inline-cta { margin-top: clamp(2rem, 4vw, 3rem); }
 .faq-cta {
   margin-top: var(--sp-6);
   padding-top: var(--sp-5);
@@ -995,8 +916,6 @@ body.nav-open { overflow: hidden; }
   color: var(--ink-soft);
   text-align: center;
 }
-.trustline .trust-link { color: var(--ink-soft); text-decoration: underline; text-underline-offset: 0.2em; }
-.trustline .trust-link:hover { color: var(--accent-dk); }
 
 /* --- 17e. Bildband & Praxis-Sektion --------------------------------------- */
 /* Bilder tragen hier Kontext, keine Dekoration: ein Motiv pro Sektion, gedeckt,
@@ -1041,14 +960,15 @@ body.nav-open { overflow: hidden; }
   border-radius: var(--radius-lg);
   background: var(--paper);
 }
-.praxis-body p { color: var(--ink-soft); max-width: 58ch; }
+.praxis-body p { color: var(--ink); max-width: 58ch; }
+.praxis-lead { font-size: clamp(1.15rem, 2vw, 1.35rem); font-weight: 600; }
 .praxis-body h2 { max-width: 20ch; }
 
 /* --- 18. Breakpoints ---------------------------------------------------- */
 @media (min-width: 640px) {
   /* minmax(0, 1fr) statt 1fr: sonst waechst eine Spalte an der min-content-Breite
      langer Komposita ueber ihren Anteil hinaus und die Seite scrollt horizontal. */
-  .card-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--sp-5); }
+  .card-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   /* Symmetrie (Jongmans et al. 2022): keine angebrochene Schlusszeile.
      Bei 5 Karten in 2 Spalten laeuft die letzte Karte ueber die volle Breite. */
   .card-grid.grid-5 > :last-child { grid-column: 1 / -1; }
@@ -1057,11 +977,13 @@ body.nav-open { overflow: hidden; }
      breiter erzeugte sie Trennungen wie „Kon-taktmoment" in Headlines. */
   h1, h2 { hyphens: manual; }
   .pillars { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .situation { flex-direction: row; align-items: center; }
   .footer-inner {
     grid-template-columns: 1fr auto;
     align-items: end;
   }
-  .footer-copy { grid-column: 1 / -1; padding-top: var(--sp-4); border-top: 1px solid var(--line); }
+  .footer-copy { grid-column: 1 / -1; }
+  .footer-brand { grid-column: 1 / -1; }
 }
 
 @media (min-width: 900px) {
@@ -1075,8 +997,9 @@ body.nav-open { overflow: hidden; }
   .card-grid.cols-3.grid-5 > :nth-child(5) { grid-column: span 3; }
 
   .hero-grid { grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); }
+  .hero h1 { grid-column: 1 / -1; max-width: none; }
+  .hero-inner { padding-top: var(--sp-6); }
   .hero-media { justify-self: end; }
-  .hero-tag { left: calc(var(--sp-5) * -1); }
   .problem-grid { grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); }
   .problem-grid .figure-band img { aspect-ratio: 4 / 3; }
   .praxis-grid { grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); }
@@ -1093,7 +1016,7 @@ body.nav-open { overflow: hidden; }
     padding-top: calc(46px + var(--sp-5));
   }
   .steps::before { left: 0; right: 0; top: 22px; bottom: auto; width: auto; height: 2px; }
-  .step-num { left: 0; top: calc((46px + var(--sp-5)) * -1); }
+  .step::before { left: 0; top: calc((46px + var(--sp-5)) * -1 + 13px); }
 }
 
 /* Desktop-Navigation erst ab 1040px: darunter brachen die Menüpunkte
@@ -1123,8 +1046,6 @@ body.nav-open { overflow: hidden; }
 
 @media (min-width: 1100px) {
   .hero-inner { max-width: 64ch; }
-  .card-grid { gap: var(--sp-6); }
-  .card-grid.quad { gap: 1px; }
 }
 
 /* --- 19. Reduzierte Bewegung ------------------------------------------- */

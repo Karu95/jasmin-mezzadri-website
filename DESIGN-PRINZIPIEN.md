@@ -206,3 +206,38 @@ Ziel: individueller statt Vorlagen-Look, ohne Inhalte zu ändern (Texte, FAQ, JS
 - **Überzeilen** in Satzschreibung mit Mint-Strich statt Versalien
 - **Bedienreibung behoben:** Desktop-Navigation erst ab 1040 px, darunter Menü-Button (vorher brachen die Menüpunkte zwischen 900 und ~1050 px zweizeilig um)
 - CSS/JS mit `?v=2` eingebunden, damit Besucher nach dem Deploy nicht das alte Stylesheet aus dem Cache sehen — bei künftigen größeren CSS-Änderungen hochzählen
+
+---
+
+## Version 2.1 — KI-Muster entfernt (28.10.2026, Entwurf zur Abnahme)
+
+Geprüft mit dem Skill `design-taste-frontend` (Lint: vorher 38 harte Funde, danach 0;
+Browser-Inspektor lief nicht, kein Chrome installiert — Prüfung per eingebautem Browser).
+
+**Design** — entfernt, weil sie als generierte Schablone gelten:
+- Überzeilen über Überschriften (auch auf Impressum, Datenschutz, 404)
+- Ziffern 01/02/03 bzw. 01–04 — die Reihenfolge zeigen Prozesslinie und Position
+- Haarlinien und 1-px-Kästen — Trennung jetzt über Tonstufen (Nebel/Mint) und Abstand
+- Schatten (außer der Kopfleiste beim Scrollen), Verlauf im Hero, Glas-Effekt im Header
+- farbig abgesetztes Wort in der H1, bedeutungslose Diagramm-Icons bei den Problemen
+
+**Ersetzt durch:** H1 über die volle Breite (Desktop/Tablet zwei Zeilen), dicke Mint-Kante
+als wiederkehrendes Motiv („Regalkante"), Fließtext in voller Tinte statt Grau, der Name
+groß im Footer, Zweitaktionen als Textlinks statt zweiter Buttons.
+
+**Interaktion:** Die Situationen in „Für wen" sind Links — Klick springt zum Formular und
+füllt „Worum geht es?" und den Nachrichtenanfang vor (`main.js`, 5b). Ohne JS normaler Sprunglink.
+
+**Texte:**
+- Überschriften auf max. zwei Zeilen gekürzt; der lange Satz steht jetzt als erster Absatz
+- Hauptaktion heißt überall „Termin vereinbaren" (vorher zusätzlich „Potenzial besprechen")
+- R8 repariert: „Wir können …" (FAQ + JSON-LD) und „Lassen Sie uns …" / „können wir sprechen" (Kontakt)
+- Geviertstriche im sichtbaren Text von ~40 auf 0 reduziert
+- FAQ-Text und JSON-LD `FAQPage` sind weiterhin 1:1 synchron
+
+**Bewusst nicht übernommen aus dem Skill:**
+- Animationsschicht (Skill fordert ≥ 8 bewegte Elemente) — widerspricht Prinzip 1/Scroll-Reveal-Entscheid
+- Mindestens 4 Fotos — es gibt nur 3 freigegebene Motive; keine Stockbilder ohne Rücksprache
+- Eckige Kanten — abgerundete Kanten sind eine belegte Dimension aus [UX] (Prinzip 2)
+- Auf dem Handy bricht der Leitsatz in drei Zeilen (Skill: max. zwei) — der Satz ist Jasmins Kernaussage
+- Jasmins eigene Formulierungen („nicht lauter, sondern relevanter", Zitat) bleiben trotz „nicht X, sondern Y"-Muster

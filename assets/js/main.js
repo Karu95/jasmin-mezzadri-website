@@ -214,6 +214,31 @@
     }
   }
 
+  /* ------------------------------------ 5b. Situation → Anfrage vorbereiten */
+  // Ein Klick auf eine Situation in „Für wen" springt zum Formular (normaler
+  // Ankerlink) und füllt „Worum geht es?" sowie den Nachrichtenanfang vor —
+  // eine Entscheidung weniger für die Besucherin. Bereits Getipptes bleibt.
+  var topicSelect = document.getElementById('f-topic');
+  var messageField = document.getElementById('f-message');
+  var nameField = document.getElementById('f-name');
+  Array.prototype.forEach.call(document.querySelectorAll('.situation[data-topic]'), function (link) {
+    link.addEventListener('click', function () {
+      if (topicSelect) {
+        Array.prototype.forEach.call(topicSelect.options, function (opt) {
+          if (opt.text === link.getAttribute('data-topic')) { topicSelect.value = opt.value; }
+        });
+      }
+      if (messageField && !messageField.value.trim()) {
+        var text = link.querySelector('.situation-text');
+        messageField.value = 'Unsere Situation: ' + (text ? text.textContent.trim() : '') + '\n\n';
+      }
+      if (nameField) {
+        // Nach dem Sprung den Fokus ins erste Feld setzen, ohne den Scroll zu stören.
+        setTimeout(function () { nameField.focus({ preventScroll: true }); }, reduceMotion ? 0 : 450);
+      }
+    });
+  });
+
   /* --------------------------------------------------- 6. Kontaktformular */
   var form = document.getElementById('contact-form');
   var status = document.getElementById('form-status');
