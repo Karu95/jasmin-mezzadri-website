@@ -1,8 +1,4 @@
-# robots.txt — https://www.mesmerizing.eu/
+# VORSCHAU — Seite noch nicht freigegeben. Vor dem Livegang auf mesmerizing.eu
+# wieder auf "Allow: /" plus Sitemap-Zeile zurücksetzen (siehe LAUNCH.md).
 User-agent: *
-Allow: /
-
-# Hinweis: /impressum.html und /datenschutz.html tragen ein Meta-Robots-Tag
-# "noindex,follow" und dürfen daher gecrawlt, aber nicht indexiert werden.
-
-Sitemap: https://www.mesmerizing.eu/sitemap.xml
+Disallow: /

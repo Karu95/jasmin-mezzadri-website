@@ -2,6 +2,10 @@
 
 Stand: 19.08.2026, nach dem Positionierungs-Umbau.
 
+## 0. Vorschau-Modus (seit 06.11.2026)
+
+Die Seite läuft zur Abstimmung mit Jasmin unter https://karu95.github.io/jasmin-mezzadri-website/ und ist für Suchmaschinen gesperrt: `noindex,nofollow` im Kopf von `index.html` und `Disallow: /` in `robots.txt`. **Beides vor dem Livegang auf mesmerizing.eu zurücksetzen.** Unter dem github.io-Unterpfad laufen die Root-Pfade der `404.html` ins Leere; mit eigener Domain ist das behoben.
+
 ## 1. Noch offene Platzhalter (blockieren den Livegang)
 
 | Platzhalter | Wo | Was einsetzen |
